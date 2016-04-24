@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华中大创客空间</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/swiper-3.3.0.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/home.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='main/js/jquery-1.11.3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/sec-tabChange.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/dl.js') }}"></script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	<div id="notice-tit" class="notice-tit">
+		<ul>
+			<!-- <li class="liclass">
+				<a href="zhuce.html" class="aclass">注册</a>
+			</li> -->
+			<li class="liclass select">
+				<a href="{{ url_for('auth.login') }}" class="aclass">登录</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_edu') }}" class="aclass">创客教育</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_activity') }}" class="aclass">日常活动</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_maker') }}" class="aclass">创客秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_project') }}" class="aclass">项目秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.index') }}" class="aclass">首页</a>
+			</li>
+			<!-- <li id="top-find">
+				<button class="top-find"><img src="../img/scope.png" alt=""></button>
+			</li>
+			<li id="top-search">
+					<input class="top-search" placeholder="请输入想搜索的内容……" type="text">
+				<div id="aho">
+
+				</div>
+			</li> -->
+		</ul>
+	</div>
+	<div id="logo">
+		<img src="{{ url_for('static', filename='main/img/Logo - Assistor.png') }}" height="48" width="230" alt="">
+	</div>
+
+	<div class="mod"  style="display: block;margin:0 auto;width:68em;">
+		<!-- 标题 -->
+		<div class="program-tit">
+			<p class="xtitle"></p>
+		</div>
+		<!-- 搜索栏 -->
+		<form class="educationg-search pro-search">
+			<button type="submit" class="education-btn"></button>
+			<input type="text" placeholder="搜索视频关键字">
+		</form>
+
+		<!-- 项目 -->
+		<div class="program-actual">
+			<div class="pro-container">
+				<div class="pro" style="display: block">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 点赞 -->
+	<script>
+	$(".push-button").click(function(event) {
+		var likenumb=$(this).parent().siblings().children().text();
+		var likenum=parseInt(likenumb);
+		likenum+=1;
+		$(this).parent().siblings().children('.likenum').text(likenum);
+		$(this).children("img").attr('src', '../../img/push.png');
+	});
+	</script>
+
+	<!-- ajax加载 -->
+	<script>
+	$(window).scroll(function() {
+		if ($(document).scrollTop()+$(window).height()>=$(document).height()){
+			
+		}
+	});
+	</script>
+
+	<script>
+		$(window).ready(function() {
+			$.ajax({
+				url: '{{ url_for("main.label_project", id=id) }}',
+				type: 'POST',
+				dataType: 'json',
+				data: {param1: 'value1'}
+			})
+			.done(function(data) {
+				var stephen = '';
+                    for (var i = 0; i < data.projects.length; i++) {
+                        stephen += '<div class="each-pro thing-pro"><div class="pro-pic"><img src="' +
+                                data.projects[i]["image_url"] +
+                                '" height="146px" width="242px"></div><div class="push"><div class="push-img"><button class="push-button"><img src="' +
+                                '{{ url_for("static",filename="main/img/heart- Assistor.png") }}' +
+                                '"></button></div><div class="push-num"><span class="likenum">' +
+                                data.projects[i]["likes"] +
+                                '</span></div></div><div class="pro-juti"><div class="pro-tit"><a href="' +
+                                data.projects[i]["url"] +
+                                '"><p><b>' +
+                                data.projects[i]["name"] +
+                                '</b></p></a></div><div class="pro-con"><p class="pro-from">' +
+                                data.projects[i]["mgr_info"] +
+                                '</p><p class="pro-owner">' +
+                                data.projects[i]["mgr_name"] +
+                                '<p class="pro-intro">' +
+                                data.projects[i]["sum"] +
+                                '</p></div></div><div class="askfor">';
+                        if (data.projects[i]["need_partners"]) {
+                            stephen += '<label for="" id="zhao">找</label>'
+                        }
+                        if (data.projects[i]["need_devices"]) {
+                            stephen += '<label for="" class="ask-label">场地</label>'
+                        }
+                        if (data.projects[i]["need_money"]) {
+                            stephen += '<label for="" class="ask-label">资金</label>'
+                        }
+                        stephen += '</div></div>'
+
+                    }
+				$(".pro").html(stephen);
+				$(".xtitle").append(data.label["name"]);
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+    		$("#top-search").hide();
+    	});
+    	$("#top-find").click(function(event) {
+    		if ($("#top-search").val() == 0) {
+                        $("#top-search").show(300,function(){
+                            $("#top-search").val(1);
+                        })
+                    } else {
+                        $("#top-search").hide(300,function(){
+                            $("#top-search").val(0);
+                        })
+                    }
+    	});
+    </script>
+</body>
+</html>

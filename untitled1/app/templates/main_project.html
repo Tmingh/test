@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华中大创客空间</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/swiper-3.3.0.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/home.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='main/js/jquery-1.11.3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/sec-tabChange.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/dl.js') }}"></script>
+</head>
+<body>
+	<div id="notice-tit" class="notice-tit">
+		<ul>
+			<li class="liclass select">
+				<a href="{{ url_for('auth.login') }}" class="aclass">登录</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_edu') }}" class="aclass">创客教育</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_activity') }}" class="aclass">日常活动</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_maker') }}" class="aclass">创客秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_project') }}" class="aclass">项目秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.index') }}" class="aclass">首页</a>
+			</li>
+		</ul>
+	</div>
+	<div id="logo">
+		<img src="{{ url_for('static', filename='main/img/Logo - Assistor.png') }}" height="48" width="230" alt="">
+	</div>
+
+	<div class="mod" style="display: block">
+		<div id="pro-choose">
+			<a href="{{ url_for('main.label_project', id=1) }}">
+			<div class="program pp pro1" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">无人机</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num1">12个项目</span>
+				</div>
+			
+			</div>
+				</a>
+			<a href="{{ url_for('main.label_project', id=2) }}">
+			<div class="program pp pro2" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">机器人</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num2">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=3) }}">
+			<div class="program pp pro3" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">3D打印机</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num3">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=4) }}">
+			<div class="program pro4" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">互联网</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num4">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=5) }}">
+			<div class="program pp pro5" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">智能硬件</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num5">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=6) }}">
+			<div class="program pp pro6" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">生物医学</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num6">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=7) }}">
+			<div class="program pp pro7" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">人文科学</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num7">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+			<a href="{{ url_for('main.label_project', id=8) }}">
+			<div class="program pro8" style="width:218px;height:123px;">
+				
+				<div class="block1">
+					<span class="pro-span">其他</span>
+				</div>
+				<div class="block2" >
+					<span class="pro-much" id="num8">12个项目</span>
+				</div>
+				
+			</div>
+			</a>
+		</div>
+
+		<div id="leadtext">
+			<div id="new" class="hola">
+				<a class="sec-aclass sec-select">最新项目</a>
+			</div>
+			<div id="hot" class="hola">
+				<a class="sec-aclass">最热项目</a>
+			</div>
+			<form class="educationg-search item-search">
+			<button type="submit" class="education-btn"></button>
+			<input type="text" placeholder="搜索视频关键字">
+		</form>
+		</div>
+
+		<div class="pro-container">
+			<div class="pro" style="display: block" id="newest_project">
+			</div>
+
+			<div class="pro" style="display: none" id="hottest_project">
+			</div>
+
+		</div>
+	</div>
+	
+	<script>
+	$(".push-button").click(function(event) {
+		var likenumb=$(this).parent().siblings().children().text();
+		var likenum=parseInt(likenumb);
+		likenum+=1;
+		$(this).parent().siblings().children('.likenum').text(likenum);
+		$(this).children("img").attr('src', '../img/push.png');
+	});
+	</script>
+
+    <script>
+        function add_project(projects) {
+            var stephen = '';
+                    for (var i = 0; i < projects.length; i++) {
+                        stephen += '<div class="each-pro thing-pro"><div class="pro-pic"><img src="' +
+                                projects[i]["image_url"] +
+                                '" height="146px" width="242px"></div><div class="push"><div class="push-img"><button class="push-button"><img src="' +
+                                '{{ url_for("static",filename="main/img/heart- Assistor.png") }}' +
+                                '"></button></div><div class="push-num"><span class="likenum">' +
+                                projects[i]["likes"] +
+                                '</span></div></div><div class="pro-juti"><div class="pro-tit"><a href="' +
+                                projects[i]["url"] +
+                                '"><p><b>' +
+                                projects[i]["name"] +
+                                '</b></p></a></div><div class="pro-con"><p class="pro-from">' +
+                                projects[i]["mgr_info"] +
+                                '</p><p class="pro-owner">' +
+                                projects[i]["mgr_name"] +
+                                '<p class="pro-intro">' +
+                                projects[i]["sum"] +
+                                '</p></div></div><div class="askfor">';
+                        if (projects[i]["need_partners"]) {
+                            stephen += '<label for="" id="zhao">找</label>'
+                        }
+                        if (projects[i]["need_devices"]) {
+                            stephen += '<label for="" class="ask-label">场地</label>'
+                        }
+                        if (projects[i]["need_money"]) {
+                            stephen += '<label for="" class="ask-label">资金</label>'
+                        }
+                        stephen += '</div></div>'
+
+                    }
+            return stephen;
+        }
+    </script>
+
+    <script>
+        $(window).scroll(function() {
+		if ($(document).scrollTop()+$(window).height()>=$(document).height()){
+
+		}
+	});
+    </script>
+
+    <script>
+        $(window).ready(function() {
+            $.ajax({
+				url: '{{ url_for("main.main_project") }}',
+				type: 'POST',
+				dataType: 'json',
+				data: {param1: 'value1'}
+			})
+			.done(function(data) {
+				var kobe = add_project(data.new_projects);
+                var lebron = add_project(data.hot_projects);
+				$("#newest_project").append(kobe);
+				$("#hottest_project").append(lebron);
+                for (var i=1; i<=data.labels_num.length; i++) {
+                    $("#num"+i).html(data.labels_num[i-1]+'个项目');
+                }
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+        })
+    </script>
+
+	<script>
+	$(document).ready(function() {
+		var block=$(".program");
+		var block1=$(".block1");
+		var block2=$(".block2");
+		var overTimer,outTimer;
+		for(var i=0;i<block.length;i++){
+			block[i].id=i;
+			block1[i].style.display="block";
+			block2[i].style.display="none";
+
+				clearTimeout(overTimer);
+				overTimer=setTimeout($(".program").mouseover(function() {
+				this.style.opacity="0.85";
+				block1[this.id].style.display="none";
+				block2[this.id].style.display="block";
+				}),500);
+
+				clearTimeout(outTimer);
+				outTimer=setTimeout($(".program").mouseout(function() {
+				this.style.opacity="1";
+				block1[this.id].style.display="block";
+				block2[this.id].style.display="none";
+				}),500);
+
+			// toggle(slow/400/fast)
+			// attr()
+		}
+	});
+	</script>
+	<script>
+		$(document).ready(function() {
+    		$("#top-search").hide();
+    	});
+    	$("#top-find").click(function(event) {
+    		if ($("#top-search").val() == 0) {
+                        $("#top-search").show(300,function(){
+                            $("#top-search").val(1);
+                        })
+                    } else {
+                        $("#top-search").hide(300,function(){
+                            $("#top-search").val(0);
+                        })
+                    }
+    	});
+    </script>
+</body>
+</html>

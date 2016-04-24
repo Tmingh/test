@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创客空间</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
+        }
+
+        #page-container {
+            width: 100%;
+            height: 900px;
+            background-color: #FFFFFF;
+        }
+
+        input[type="text"] {
+            background-color: transparent;
+            border: none;
+            border-bottom: #00171F solid 2px;
+            margin-right: 150px;
+            font-size: 18px;
+        }
+
+        textarea {
+            font-size: 18px;
+        }
+
+        #page {
+            width: 100%;
+            height: 100%;
+        }
+
+        #nav-container {
+            width: 150px;
+            float: left;
+            background-color: #B0BEC5;
+            height: 100%;
+        }
+
+        #content-container {
+            float: left;
+            width: 1300px;
+            position: absolute;
+            top: 0;
+            left: 150px;
+
+        }
+
+        #logo {
+            background-color: gray;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        #nav {
+            width: 100%;
+            list-style: none;
+            font-weight: lighter;
+            color: snow;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #nav-project {
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        #nav-show {
+            background-color: #00A8E8;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        #nav-banner {
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        #nav-edu {
+            background-color: #00A8E8;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        #nav-activity {
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .nav-list {
+            display: none;
+            color: #233333;
+            width: 100%;
+            height: 85px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #CFD8DC;
+        }
+
+        .content {
+            display: none;
+            width: 100%;
+            height: auto;
+            padding-left: 50px;
+            padding-top: 70px;
+            line-height: 40px;
+            color: #00171F;
+        }
+
+        #bar {
+            width: 100%;
+            height: 55px;
+            float: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #003459;
+            border: #00171F 1px solid;
+            border-radius: 5px;
+        }
+
+        #user {
+            float: right;
+            color: #b3d4fd;
+            line-height: 55px;
+            right: 50px;
+            position: absolute;
+            top: 0;
+
+        }
+
+        #left {
+            float: right;
+            color: #b3d4fd;
+            line-height: 55px;
+            left: 15px;
+            position: absolute;
+            top: 0;
+        }
+
+        .search {
+            margin-left: 50px;
+            margin-top: 50px;
+            /*background:url(images/search_inner.png) no-repeat 10px;*/
+            background: #b3d4fd;
+            background-position: 10px 10px;
+            width: 380px;
+            height: 60px;
+        }
+
+        .search-inner {
+            width: 440px;
+            height: 40px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        .search-inner form input.searchbutton {
+            background: #0F769F;
+            width: 80px;
+            height: 50px;
+            border: none;
+            margin-top: 5px;
+            float: right;
+            color: #FFF;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-inner form input.searchfield {
+            width: 240px;
+            height: 38px;
+            margin-top: 11px;
+            border: none;
+            background: transparent;
+            color: #666666;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 38px;
+            margin-right: 0;
+        }
+
+        .content-table {
+            margin-top: 70px;
+            width: 1500px;
+            text-align: center;
+        }
+
+        .content-table td {
+            background-color: #b3d4fd;
+            margin-right: 10px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+
+        .output-button {
+            /*float: right;*/
+            margin-top: 30px;
+        }
+
+        .preview{
+            float: right;
+            display: inline-block;
+            width: 260px;
+            height:190px;
+            border:1px solid #000;
+            overflow:hidden;
+        }
+
+        /*.content-table-title {*/
+            /*width: 250px;*/
+            /*text-align: center;*/
+/**/
+        /*}*/
+    </style>
+    <script src="{{ url_for('static', filename='jquery-2.2.2.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/wangEditor.min.css') }}"/>
+
+</head>
+<body>
+
+<div id="page-container">
+    <div id="page">
+        <div id="nav-container">
+            <div id="nav">
+                <div id="logo"></div>
+                <ul>
+                    <li>
+                        <div id="nav-project">项目秀</div>
+                        <div id="nav-project-list" class="nav-list" style="display: block">
+                            <ul>
+                                <li id="first" onclick="changeContent('#content-project-add',this)"
+                                    style="font-weight: bold">添加项目
+                                </li>
+                                <li onclick="changeContent('#content-project-now',this)">当前项目</li>
+                                <li onclick="changeContent('#content-project-deleted',this)">已删除项目</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-show">创客秀</div>
+                        <div id="nav-show-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-maker-add',this)">添加项目</li>
+                                <li onclick="changeContent('#content-maker-now',this)">当前项目</li>
+                                <li onclick="changeContent('#content-maker-deleted',this)">已删除项目</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div id="nav-edu">创客教育</div>
+                        <div id="nav-edu-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-edu-add',this)">添加项目</li>
+                                <li onclick="changeContent('#content-edu-now',this)">当前项目</li>
+                                <li onclick="changeContent('#content-edu-deleted',this)">已删除项目</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-activity">日常活动</div>
+                        <div id="nav-activity-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-activity-add',this)">添加项目</li>
+                                <li onclick="changeContent('#content-activity-now',this)">当前项目</li>
+                                <li onclick="changeContent('#content-activity-deleted',this)">已删除项目</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-banner">主页</div>
+                        <div id="nav-banner-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-index-banner',this)">banner管理</li>
+                                <li onclick="changeContent('#content-index-handpicked',this)">精选管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="bar">
+            <div id="left">创客空间后台系统</div>
+            <div id="user">
+                Hello,Admin
+            </div>
+        </div>
+        <div id="content-container">
+            <div class="content" id="content-project-add" style="display: block">
+                <form action="{{ url_for('backend.add_project') }}" method="post" enctype="multipart/form-data" id="project_add">
+                    项目名称：<input name="proj_name" type="text" required="required">
+                    项目封面图片：
+                    <span class="input-image">
+                    <input name="proj_image" type="file" required="required" onchange="previewImage(this, 0, false)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    负责人姓名：<input name="proj_manager_name" type="text" required="required">
+                    负责人院系年级：<input name="proj_manager_info" type="text" required="required"><br/>
+                    联系邮箱：<input name="proj_email" type="text" required="required">
+                    需要资源：<input name="need_money" type="checkbox">&nbsp;资金&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="need_partners" type="checkbox">&nbsp;团队伙伴&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="need_devices" type="checkbox">&nbsp;场地与设备<br/>
+                    指导老师：<input name="proj_teacher" type="text" required="required">
+                    标签：
+                    <select multiple id="select1" style="width: 180px;height: 100px" >
+                        <option value="1">无人机</option>
+                        <option value="2">机器人</option>
+                        <option value="3">3D打印</option>
+                        <option value="4">互联网</option>
+                        <option value="5">智能硬件</option>
+                        <option value="6">生物医学</option>
+                        <option value="7">人文科学</option>
+                        <option value="8">其他</option>
+                    </select>
+                    <select multiple id="select2" style="width: 180px;height: 100px" name="labels"></select>
+                    <a href="#" onclick="$('#select1 option:selected').remove().appendTo('#select2')" style="display: inline">
+                        add
+                    </a>
+                    <a href="#" onclick="$('#select2 option:selected').remove().appendTo('#select1')" style="display: inline">
+                        del
+                    </a><br/>
+                    项目简介：<br/>
+                    <textarea name="proj_sum" cols="50" onfocus="this.value = this.value.substring(0,25);"
+                              onblur="this.value = this.value.substring(0,25);" required="required"></textarea><br/>
+                    项目内容:<br/>
+                    <textarea id="proj_editor" name="proj_introduction" required="required"></textarea><br/>
+                    <input type="submit" id="proj_submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-project-now">
+            <div class="search">
+                <div class="search-inner">
+                    <form>
+                        <select name="proj_search_cur_type">
+                            <option value="name">按标题</option>
+                            <option value="tag">按标签</option>
+                        </select>
+                        <input type="text" name="proj_search_current" maxlength="30" class="searchfield" title="searchfield"
+                               value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                               onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                        <input type="submit" name="current" value="搜索" alt="Search" class="searchbutton proj_search"/>
+                    </form>
+                </div>
+                <button class="output-button">导出项目信息</button>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>项目名称</td>
+                            <td>负责人姓名</td>
+                            <td>学院年级</td>
+                            <td>指导老师</td>
+                            <td>项目内容</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="proj_current_item">
+                        {% for project in current_projects %}
+                        <tr>
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.mgr_name }}</td>
+                            <td>{{ project.mgr_info }}</td>
+                            <td>{{ project.teacher }}</td>
+                            <td><a href="{{ url_for('main.solo_project', id=project.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_proj({{project.id}}, 0)">删除</a>
+                                <a href="#" onclick="delete_proj({{project.id}}, 1)">彻底删除</a>
+                                <a href="#" onclick="add_proj_to_homepage({{project.id}})">添加至首页</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            </div>
+            <div class="content" id="content-project-deleted">
+                <div class="search-inner">
+                    <form>
+                        <select name="proj_search_del_type">
+                            <option >按标题</option>
+                            <option>按标签</option>
+                        </select>
+                        <input type="text" name="proj_search_deleted" maxlength="30" class="searchfield" title="searchfield"
+                               value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                               onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                        <input type="submit" name="deleted" value="搜索" alt="Search" class="searchbutton proj_search"
+                               title="Search"/>
+                    </form>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>项目名称</td>
+                            <td>负责人姓名</td>
+                            <td>学院年级</td>
+                            <td>指导老师</td>
+                            <td>查看项目</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="proj_deleted_item">
+                        {% for project in deleted_projects %}
+                        <tr>
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.mgr_name }}</td>
+                            <td>{{ project.mgr_info }}</td>
+                            <td>{{ project.teacher }}</td>
+                            <td><a href="{{ url_for('main.solo_project', id=project.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_proj({{project.id}}, 1)">彻底删除</a>
+                                <a href="#" onclick="regain_proj({{project.id}})">恢复</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="content" id="content-maker-add">
+                <form action="{{ url_for('backend.add_maker') }}" method="post" enctype="multipart/form-data">
+                    创客姓名：<input name="maker_name" type="text"><br/>
+                    创客图片：
+                    <span class="input-image">
+                    <input name="maker_image" type="file" required="required" onchange="previewImage(this, 1, false)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    院系与年级：<input name="maker_info" type="text"><br/>
+                    简介：<br/>
+                    <textarea name="maker_sum" onfocus="this.value = this.value.substring(0,25);"
+                              onblur="this.value = this.value.substring(0,25);" cols="50"></textarea><br/>
+                    详细介绍:<br/>
+                    <textarea id="maker_editor" name="maker_introduction"></textarea>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-maker-now">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="maker_search_current" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="current" value="搜索" alt="Search" class="searchbutton maker_search"
+                                   title="Search"/>
+                        </form>
+                    </div>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>创客姓名</td>
+                            <td>年级与学院</td>
+                            <td>查看项目</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="maker_current_item">
+                        {% for maker in current_makers %}
+                        <tr>
+                            <td>{{ maker.name }}</td>
+                            <td>{{ maker.info }}</td>
+                            <td><a href="{{ url_for('main.solo_maker', id=maker.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_maker({{ maker.id }}, 0)">删除</a>
+                                <a href="#" onclick="delete_maker({{ maker.id }}, 1)">彻底删除</a>
+                                <a href="#" onclick="add_maker_to_homepage({{ maker.id }})">添加至首页</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="content" id="content-maker-deleted">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="maker_search_deleted" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="deleted" value="搜索" alt="Search" class="searchbutton maker_search"
+                                   title="Search"/>
+                        </form>
+
+                    </div>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>创客姓名</td>
+                            <td>年级与学院</td>
+                            <td>查看项目</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="maker_deleted_item">
+                        {% for maker in deleted_makers %}
+                        <tr>
+                            <td>{{ maker.name }}</td>
+                            <td>{{ maker.info }}</td>
+                            <td><a href="{{ url_for('main.solo_maker', id=maker.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_maker({{ maker.id }}, 1)"> 彻底删除</a>
+                                <a href="#" onclick="regain_maker({{ maker.id }})"> 恢复</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="content" id="content-activity-add">
+                <form method="post" action="{{ url_for('backend.add_activity') }}" enctype="multipart/form-data">
+                    活动标题：<input name="activity_name" type="text"><br/>
+                    活动封面图片：
+                    <span class="input-image">
+                    <input name="activity_image" type="file" required="required" onchange="previewImage(this, 2, false)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    报名二维码:
+                    <span class="input-image">
+                    <input name="activity_enroll" type="file" required="required" onchange="previewImage(this, 3, false)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    活动发起者：<input name="activity_sponsor" type="text"><br/>
+                    活动简介：<br/> <textarea name="activity_sum" onfocus="this.value = this.value.substring(0,25);"
+                                         onblur="this.value = this.value.substring(0,25);" cols="50"></textarea><br/>
+                    活动内容：
+                    <textarea id="activity_editor" name="activity_introduction" autofocus></textarea>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-activity-now">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="activity_search_current" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="current" value="搜索" alt="Search" class="searchbutton activity_search"
+                                   title="Search"/>
+                        </form>
+
+                    </div>
+                    <form>
+                        <table class="content-table">
+                            <tr>
+                                <td>活动名称</td>
+                                <td>发起人</td>
+                                <td>活动内容</td>
+                                <td>操作</td>
+                            </tr>
+                            <tbody id="activity_current_item">
+                            {% for activity in current_activities %}
+                            <tr>
+                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.sponsor }}</td>
+                                <td><a href="{{ url_for('main.solo_activity', id=activity.id) }}">点击查看</a></td>
+                                <td>
+                                    <a href="#" onclick="delete_activity({{ activity.id }}, 0)">删除</a>
+                                    <a href="#" onclick="delete_activity({{ activity.id }}, 1)">彻底删除</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="content" id="content-activity-deleted">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="activity_search_deleted" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="deleted" value="搜索" alt="Search" class="searchbutton activity_search"
+                                   title="Search"/>
+                        </form>
+
+                    </div>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>活动名称</td>
+                            <td>发起人</td>
+                            <td>活动内容</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="activity_deleted_item">
+                        {% for activity in deleted_activities %}
+                        <tr>
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.sponsor }}</td>
+                            <td><a href="{{ url_for('main.solo_activity', id=activity.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_activity({{ activity.id }}, 1)">彻底删除</a>
+                                <a href="#" onclick="regain_activity({{ activity.id }})">恢复</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="content" id="content-edu-add">
+                <form action="{{ url_for('backend.add_edu') }}" method="post" enctype="multipart/form-data">
+                    项目名: <input name="edu_name" type="text" required="required"/><br/>
+                    主讲人/团队: <input name="edu_speaker" type="text" required="required"/><br/>
+                    简介：<br/>
+                    <textarea name="edu_sum" onfocus="this.value = this.value.substring(0,25);"
+                              onblur="this.value = this.value.substring(0,25);" cols="50"></textarea><br/>
+                    封面图片:
+                    <span class="input-image">
+                    <input name="edu_image" type="file" required="required" onchange="previewImage(this, 4, false)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    视频:
+                    <span id="videofield"></span>
+                    <a href="#" id="add_video">添加视频</a><br/>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-edu-now">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="edu_search_current" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="current" value="搜索" alt="Search" class="searchbutton edu_search"
+                                   title="Search"/>
+                        </form>
+                    </div>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>名称</td>
+                            <td>主讲人</td>
+                            <td>查看项目</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="edu_current_item">
+                        {% for edu in current_edus %}
+                        <tr>
+                            <td>{{ edu.name }}</td>
+                            <td>{{ edu.speaker }}</td>
+                            <td><a href="{{ url_for('main.solo_edu', id=edu.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_edu({{ edu.id }}, 0)">删除</a>
+                                <a href="#" onclick="delete_edu({{ edu.id }}, 1)">彻底删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="content" id="content-edu-deleted">
+                <div class="search">
+                    <div class="search-inner">
+                        <form>
+                            <input type="text" name="edu_search_deleted" maxlength="30" class="searchfield" title="searchfield"
+                                   value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''"
+                                   onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="deleted" value="搜索" alt="Search" class="searchbutton edu_search"
+                                   title="Search"/>
+                        </form>
+
+                    </div>
+                </div>
+                <form>
+                    <table class="content-table">
+                        <tr>
+                            <td>名称</td>
+                            <td>主讲人</td>
+                            <td>查看项目</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="edu_deleted_item">
+                        {% for edu in deleted_edus %}
+                        <tr>
+                            <td>{{ edu.name }}</td>
+                            <td>{{ edu.speaker }}</td>
+                            <td><a href="{{ url_for('main.solo_edu', id=edu.id) }}">点击查看</a></td>
+                            <td>
+                                <a href="#" onclick="delete_edu({{ edu.id }}, 1)">彻底删除</a>
+                                <a href="#" onclick="regain_edu({{ edu.id }})">恢复</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="content" id="content-index-banner">
+                <form id="banner_add_form">
+                    Banner图片：<span class="input-image">
+                    <input name="banner_image" type="file" required="required" onchange="previewImage(this, 5, true)"/>
+                    </span>
+                    <span class="preview"><img class="imghead"/></span><br/>
+                    Banner链接：
+                    <input name="banner_target" type="text"><br/>
+                    <button onclick="add_banner()">提交</button>
+                </form><br/><br/>
+                <table class="content-table" id="banners_table">
+                    <thead>
+                    <tr>
+                        <td>编号</td>
+                        <td>查看项目</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="banners">
+                    {% for banner in banners %}
+                    <tr num="{{ banner.id }}">
+                        <td>{{ banner.number }}</td>
+                        <td><a href="{{ banner.target_url }}">点击查看</a></td>
+                        <td>
+                            <a onclick="moveUp(this)" href="#">上移</a>
+                            <a onclick="moveDown(this)" href="#">下移</a>
+                            <a href="#" onclick="delete_banner({{ banner.id }})">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button onclick="submit_banner()">提交</button>
+            </div>
+            <div class="content" id="content-index-handpicked">
+                管理精选项目:<br>
+                <table class="content-table" id="hp_projects_table">
+                    <thead>
+                    <tr>
+                        <td>项目</td>
+                        <td>查看项目</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="hp_projects">
+                    {% for project in hp_projects %}
+                    <tr num="{{ project.id }}">
+                        <td>{{ project.name }}</td>
+                        <td><a href="#">点击查看</a></td>
+                        <td>
+                            <a onclick="moveUp(this)" href="#">上移</a>
+                            <a onclick="moveDown(this)" href="#">下移</a>
+                            <a href="#" onclick="delete_hp_project({{ project.id }})">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button onclick="submit_hp_projects()">提交</button>
+
+                管理精选创客:<br>
+                <table class="content-table" id="hp_makers_table">
+                    <thead>
+                    <tr>
+                        <td>项目</td>
+                        <td>查看项目</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody id="hp_makers">
+                    {% for maker in hp_makers %}
+                    <tr num="{{ maker.number }}">
+                        <td>{{ maker.name }}</td>
+                        <td><a href="#">点击查看</a></td>
+                        <td>
+                            <a onclick="moveUp(this)" href="#">上移</a>
+                            <a onclick="moveDown(this)" href="#">下移</a>
+                            <a href="#" onclick="delete_hp_maker({{ maker.id }})">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button onclick="submit_hp_makers()">提交</button>
+            </div>
+
+
+        </div>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery-1.10.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/wangEditor.js') }}"></script>
+
+
+        <script type="text/javascript">
+            $(function() {
+                $('#select2').bind('blur', function() {
+                    $('#select2').children().each(function() {
+                        this.selected = true
+                    });
+                });
+                return false;
+            })
+        </script>
+
+        <script type=text/javascript>
+            $(function() {
+                $(".proj_search").bind('click', function() {
+                    var that = this;
+                    var type, key;
+                    if (this.name == 'current') {
+                        type = $("select[name='proj_search_cur_type']").val();
+                        key = $('input[name="proj_search_current"]').val()
+                    } else if (this.name == 'deleted') {
+                        type = $("select[name='proj_search_del_type']").val();
+                        key = $('input[name="proj_search_deleted"]').val()
+                    }
+                    $.getJSON("{{ url_for('backend.search_proj') }}", {
+                        type: type,
+                        target: this.name,
+                        key: key
+                    }, function(data) {
+                        if (that.name == 'current') {
+                            $("#proj_current_item").html(data.result);
+                        } else if (that.name == 'deleted') {
+                            $("#proj_deleted_item").html(data.result);
+                        }
+                    });
+                    return false;
+                });
+
+                $(".maker_search").bind('click', function() {
+                    var that = this;
+                    var key;
+                    if (this.name == 'current') {
+                        key = $('input[name="maker_search_current"]').val()
+                    } else if (this.name == 'deleted') {
+                        key = $('input[name="maker_search_deleted"]').val()
+                    }
+                    $.getJSON("{{ url_for('backend.search_maker') }}", {
+                        target: this.name,
+                        key: key
+                    }, function(data) {
+                        if (that.name == 'current') {
+                            $("#maker_current_item").html(data.result);
+                        } else if (that.name == 'deleted') {
+                            $("#maker_deleted_item").html(data.result);
+                        }
+                    });
+                    return false;
+                });
+
+                $(".activity_search").bind('click', function() {
+                    var that = this;
+                    var key;
+                    if (this.name == 'current') {
+                        key = $('input[name="activity_search_current"]').val()
+                    } else if (this.name == 'deleted') {
+                        key = $('input[name="activity_search_deleted"]').val()
+                    }
+                    $.getJSON("{{ url_for('backend.search_activity') }}", {
+                        target: this.name,
+                        key: key
+                    }, function(data) {
+                        if (that.name == 'current') {
+                            $("#activity_current_item").html(data.result);
+                        } else if (that.name == 'deleted') {
+                            $("#activity_deleted_item").html(data.result);
+                        }
+                    });
+                    return false;
+                });
+
+                $(".edu_search").bind('click', function() {
+                    var that = this;
+                    var key;
+                    if (this.name == 'current') {
+                        key = $('input[name="edu_search_current"]').val()
+                    } else if (this.name == 'deleted') {
+                        key = $('input[name="edu_search_deleted"]').val()
+                    }
+                    $.getJSON("{{ url_for('backend.search_edu') }}", {
+                        target: this.name,
+                        key: key
+                    }, function(data) {
+                        if (that.name == 'current') {
+                            $("#edu_current_item").html(data.result);
+                        } else if (that.name == 'deleted') {
+                            $("#edu_deleted_item").html(data.result);
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            function delete_proj(id, type) {
+                if (type == 0) {
+                    $.getJSON("{{ url_for('backend.delete_proj') }}", {
+                        proj_id: id
+                    }, function(data) {
+                        $("#proj_current_item").html(data.result_cur);
+                        $("#proj_deleted_item").html(data.result_del);
+                    });
+                } else if (type == 1) {
+                    $.getJSON("{{ url_for('backend.del_proj')}}", {
+                        proj_id: id
+                    }, function(data) {
+                        $("#proj_current_item").html(data.result_cur);
+                        $("#proj_deleted_item").html(data.result_del);
+                    })
+                }
+            }
+
+            function delete_maker(id, type) {
+                if (type == 0) {
+                    $.getJSON("{{ url_for('backend.delete_maker') }}", {
+                        maker_id: id
+                    }, function(data) {
+                        $("#maker_current_item").html(data.result_cur);
+                        $("#maker_deleted_item").html(data.result_del);
+                    });
+                } else if (type == 1) {
+                    $.getJSON("{{ url_for('backend.del_maker')}}", {
+                        maker_id: id
+                    }, function(data) {
+                        $("#maker_current_item").html(data.result_cur);
+                        $("#maker_deleted_item").html(data.result_del);
+                    })
+                }
+            }
+
+            function delete_activity(id, type) {
+                if (type == 0) {
+                    $.getJSON("{{ url_for('backend.delete_activity') }}", {
+                        activity_id: id
+                    }, function(data) {
+                        $("#activity_current_item").html(data.result_cur);
+                        $("#activity_deleted_item").html(data.result_del);
+                    });
+                } else if (type == 1) {
+                    $.getJSON("{{ url_for('backend.del_activity')}}", {
+                        activity_id: id
+                    }, function(data) {
+                        $("#activity_current_item").html(data.result_cur);
+                        $("#activity_deleted_item").html(data.result_del);
+                    })
+                }
+            }
+
+            function delete_edu(id, type) {
+                if (type == 0) {
+                    $.getJSON("{{ url_for('backend.delete_edu') }}", {
+                        edu_id: id
+                    }, function(data) {
+                        $("#edu_current_item").html(data.result_cur);
+                        $("#edu_deleted_item").html(data.result_del);
+                    });
+                } else if (type == 1) {
+                    $.getJSON("{{ url_for('backend.del_edu')}}", {
+                        edu_id: id
+                    }, function(data) {
+                        $("#edu_current_item").html(data.result_cur);
+                        $("#edu_deleted_item").html(data.result_del);
+                    })
+                }
+            }
+        </script>
+
+        <script type="text/javascript">
+            function regain_proj(id) {
+                $.getJSON("{{ url_for('backend.regain_proj') }}", {
+                    proj_id: id
+                }, function(data) {
+                    $("#proj_current_item").html(data.result_cur);
+                    $("#proj_deleted_item").html(data.result_del);
+                })
+            }
+            function regain_maker(id) {
+                $.getJSON("{{ url_for('backend.regain_maker') }}", {
+                    maker_id: id
+                }, function(data) {
+                    $("#maker_current_item").html(data.result_cur);
+                    $("#maker_deleted_item").html(data.result_del);
+                })
+            }
+            function regain_activity(id) {
+                $.getJSON("{{ url_for('backend.regain_activity') }}", {
+                    activity_id: id
+                }, function(data) {
+                    $("#activity_current_item").html(data.result_cur);
+                    $("#activity_deleted_item").html(data.result_del);
+                })
+            }
+            function regain_edu(id) {
+                $.getJSON("{{ url_for('backend.regain_edu') }}", {
+                    edu_id: id
+                }, function(data) {
+                    $("#edu_current_item").html(data.result_cur);
+                    $("#edu_deleted_item").html(data.result_del);
+                })
+            }
+        </script>
+
+        <script type="text/javascript">
+            function previewImage(file, num, type) {
+                var name = file.name;
+                var MAXWIDTH = 260;
+                var MAXHEIGHT = 180;
+                var div = $(".preview");
+                var div1 = $(".input-image");
+                if (file.files && file.files[0]) {
+                    var filename = file.files[0].name;
+                    var extStart = filename.lastIndexOf(".");
+                    var ext = filename.substring(extStart, filename.length).toUpperCase();
+                    if (ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG" && ext != ".BMP") {
+                        alert("图片限于bmp,png,gif,jpeg,jpg格式");
+                        (div1[num]).innerHTML = "<input type=\"file\" onchange=\"previewImage(this,"+num+","+type+")\" name=\""+name+"\"/>";
+                        console.log("<input type=\"file\" onchange=\"previewImage(this,"+num+","+type+")\" name=\""+name+"\"/>");
+                        (div[num]).innerHTML = '<img class=imghead>';
+                        return false;
+                    }
+                    console.log(div[num]);
+                    (div[num]).innerHTML = '<img class=imghead>';
+                    var img = $(".imghead");
+                    (img[num]).onload = function () {
+                        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, this.offsetWidth, this.offsetHeight);
+                        if (type == true) {
+                            if (this.offsetWidth < 1440 || this.offsetHeight < 900) {
+                                alert("图片分辨率应大于1440X900");
+                                (div1[num]).innerHTML = "<input type=\"file\" onchange=\"previewImage(this,"+num+","+type+")\" name=\""+name+"\"/>";
+                                (div[num]).innerHTML = '<img class=imghead>';
+                                return false;
+                            }
+                        }
+                        this.width = rect.width;
+                        this.height = rect.height;
+                        this.style.marginTop = rect.top + 'px';
+                    };
+                    var reader = new FileReader();
+
+                    reader.onload = function (evt) {
+                        (img[num]).src = evt.target.result;
+                    };
+                    reader.readAsDataURL(file.files[0]);
+                }
+            }
+            function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+                var param = {top:0, left:0, width:width, height:height};
+                if( width>maxWidth || height>maxHeight )
+                {
+                    rateWidth = width / maxWidth;
+                    rateHeight = height / maxHeight;
+
+                    if( rateWidth > rateHeight )
+                    {
+                        param.width =  maxWidth;
+                        param.height = Math.round(height / rateWidth);
+                    }else
+                    {
+                        param.width = Math.round(width / rateHeight);
+                        param.height = maxHeight;
+                    }
+                }
+
+                param.left = Math.round((maxWidth - param.width) / 2);
+                param.top = Math.round((maxHeight - param.height) / 2);
+                return param;
+            }
+        </script>
+
+        <script>
+            var nowPage = "#content-project-add", nowNav = document.getElementById("first");
+            $('document').ready(function () {
+                var editorMenus = ['source', '|', 'bold', 'underline', 'italic', 'strikethrough', 'eraser',
+                    'forecolor', 'bgcolor', '|', 'quote', 'fontsize', 'head', 'unorderlist', 'orderlist',
+                    'alignleft', 'aligncenter', 'alignright', '|', 'link', 'unlink', 'table', '|', 'img',
+                    'insertcode', '|', 'undo', 'redo', 'fullscreen'];
+                var editor1 = new wangEditor('proj_editor');
+                editor1.config.menus = editorMenus;
+                editor1.config.uploadImgUrl = " {{ url_for('backend.GetImage') }} ";
+                editor1.create();
+
+                var editor2 = new wangEditor('maker_editor');
+                editor2.config.menus = editorMenus;
+                editor2.config.uploadImgUrl = " {{ url_for('backend.GetImage') }} ";
+                editor2.create();
+
+                var editor3 = new wangEditor('activity_editor');
+                editor3.config.menus = editorMenus;
+                editor3.config.uploadImgUrl = " {{ url_for('backend.GetImage') }} ";
+                editor3.create();
+
+                $('#nav-project').click(function () {
+                    $('#nav-project-list').slideToggle();
+                });
+                $('#nav-show').click(function () {
+                    $('#nav-show-list').slideToggle();
+                });
+                $('#nav-edu').click(function () {
+                    $('#nav-edu-list').slideToggle();
+                });
+                $('#nav-activity').click(function () {
+                    $('#nav-activity-list').slideToggle();
+                });
+                $('#nav-banner').click(function () {
+                    $('#nav-banner-list').slideToggle();
+                });
+            });
+            function changeContent(name, element) {
+                element.style.fontWeight = "bold";
+                nowNav.style.fontWeight = "lighter";
+                nowNav = element;
+                $(".input-image").innerHTML = "<input type=\"file\" onchange=\"previewImage(this)\"/>";
+                $(".preview").innerHTML = null;
+                $(nowPage).fadeOut(function () {
+                    $(name).fadeIn();
+                    nowPage = name;
+                })
+            }
+
+        </script>
+
+        <script>
+            $(function() {
+                $('#add_video').bind('click', function () {
+                    $('#videofield').append('<span>' +
+                            '<label> 段落名: </label><input name="video_name" type="text" required="required"/>' +
+                            '<label> 链接: </label><input name="video_url" type="text" required="required"/>' +
+                            '<a class="del_video" href="#"> 删除</a><br/>' +
+                            '</span><br/>');
+                    $('.del_video').bind('click', function (event) {
+                        console.log('2333');
+                        $(event.target).parent().remove();
+                    });
+                });
+            })
+        </script>
+
+        <script>
+            function moveUp(o) {
+                $(o).parent().parent("tr").insertBefore($(o).parent().parent("tr").prev());
+            }
+            function moveDown(o) {
+                $(o).parent().parent("tr").insertAfter($(o).parent().parent("tr").next());
+            }
+            function submit_banner() {
+                var result = [];
+                var a = document.getElementById("banners_table").getElementsByTagName("tr");
+
+                for (var i = 1; i < a.length; i++) {
+                    result[i - 1] = parseInt(a[i].getAttribute("num"));
+                }
+                $.getJSON("{{ url_for('backend.change_banners') }}", {
+                    banners_submit: result
+                }, function(data) {
+                    alert(data.response)
+                });
+            }
+            function add_banner() {
+                var a = document.getElementById("banners_table").getElementsByTagName("tr");
+                if (a.length >= 3) {
+                    alert('banner数已满，请删除后在进行添加');
+                    return false;
+                } else {
+                    $('#banner_add_form').submit();
+                    return true;
+                }
+            }
+            function submit_hp_projects() {
+                var result = [];
+                var a = document.getElementById("hp_projects_table").getElementsByTagName("tr");
+
+                for (var i = 1; i < a.length; i++) {
+                    result[i - 1] = parseInt(a[i].getAttribute("num"));
+                }
+                $.getJSON("{{ url_for('backend.change_hp_projects') }}", {
+                    hp_projects_submit: result
+                }, function(data) {
+                    alert(data.response)
+                });
+            }
+            function submit_hp_makers() {
+                var result = [];
+                var a = document.getElementById("hp_makers_table").getElementsByTagName("tr");
+
+                for (var i = 1; i < a.length; i++) {
+                    result[i - 1] = parseInt(a[i].getAttribute("num"));
+                }
+                $.getJSON("{{ url_for('backend.change_hp_makers') }}", {
+                    hp_makers_submit: result
+                }, function(data) {
+                    alert(data.response)
+                });
+            }
+            function delete_banner(id){
+                $.getJSON("{{ url_for('backend.delete_banner') }}", {
+                    banner_id: id
+                }, function(data) {
+                    $('#banners').html(data.result)
+                })
+            }
+            function delete_hp_project(id) {
+                $.getJSON("{{ url_for('backend.delete_hp_project') }}", {
+                    hp_project_id: id
+                }, function(data) {
+                    $('#hp_projects').html(data.result)
+                })
+            }
+            function delete_hp_maker(id) {
+                $.getJSON("{{ url_for('backend.delete_hp_maker') }}", {
+                    hp_maker_id: id
+                }, function(data) {
+                    $('#hp_makers').html(data.result)
+                })
+            }
+            function add_proj_to_homepage(id) {
+                $.getJSON("{{ url_for('backend.add_proj_to_homepage') }}", {
+                    proj_id : id
+                }, function(data) {
+                    alert(data.response)
+                })
+            }
+            function add_maker_to_homepage(id) {
+                $.getJSON("{{ url_for('backend.add_maker_to_homepage') }}", {
+                    maker_id: id
+                }, function(data) {
+                    alert(data.response)
+                })
+            }
+        </script>
+
+        </div>
+    </div>
+</body>
+</html>

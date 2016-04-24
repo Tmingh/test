@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华中大创客空间</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/swiper-3.3.0.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/home.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='main/js/jquery-1.11.3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/sec-tabChange.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/dl.js') }}"></script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	<div id="notice-tit" class="notice-tit">
+		<ul>
+			<li class="liclass select">
+				<a href="{{ url_for('auth.login') }}" class="aclass">登录</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_edu') }}" class="aclass">创客教育</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_activity') }}" class="aclass">日常活动</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_maker') }}" class="aclass">创客秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_project') }}" class="aclass">项目秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.index') }}" class="aclass">首页</a>
+			</li>
+			<!-- <li id="top-find">
+				<button class="top-find"><img src="../img/scope.png" alt=""></button>
+			</li>
+			<li id="top-search">
+					<input class="top-search" placeholder="请输入想搜索的内容……" type="text">
+				<div id="aho">
+
+				</div>
+			</li> -->
+		</ul>
+	</div>
+	<div id="logo">
+		<img src="{{ url_for('static', filename='main/img/Logo - Assistor.png') }}" height="48" width="230" alt="">
+	</div>
+
+	<div class="mod" id="mod-zc">
+				<div class="title-container">
+    				<div class="title">
+    					<div class="t1">华中大创客空间</div>
+    					<div class="t2">注册</div>
+    				</div>
+    			</div>
+    			<div id="zc-container">
+    				<div id="zc">
+    					<form>
+							<input type="text" placeholder="学号" name="student_id">
+							<input type="password" placeholder="创建密码" name="password">
+							<input type="text" placeholder="姓名" name="name">
+    						<input type="text" placeholder="院系" name="faculty">
+    						<input type="text" placeholder="班级" name="class_grade">
+    						<input type="text" placeholder="手机号" name="phone_number">
+    						<input type="text" placeholder="邮箱" name="email">
+    						<textarea placeholder="个人简介" name="sum"></textarea>
+    						<button type="submit">立即注册</button>
+    					</form>
+    					<div class="footer">
+    						<div class="t1">已经是华中大创客空间会员？</div>
+    						<div class="t2"><a href="{{ url_for('auth.login') }}">立即登录</a></div>
+    					</div>
+    				</div>
+    			</div>
+			</div>
+	<script>
+		$(document).ready(function() {
+    		$("#top-search").hide();
+    	});
+    	$("#top-find").click(function(event) {
+    		if ($("#top-search").val() == 0) {
+                        $("#top-search").show(300,function(){
+                            $("#top-search").val(1);
+                        })
+                    } else {
+                        $("#top-search").hide(300,function(){
+                            $("#top-search").val(0);
+                        })
+			}
+    	});
+    </script>
+</body>
+</html>

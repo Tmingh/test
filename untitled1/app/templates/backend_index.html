@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创客空间</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+        }
+        #page-container{
+            width: 100%;
+            height: 900px;
+            background-color: #FFFFFF;
+        }
+        input[type="text"]{
+            background-color: transparent;
+            border: none;
+            border-bottom: #00171F solid 2px;
+            margin-right: 150px;
+            font-size: 18px;
+        }
+        textarea{
+            font-size: 18px;
+        }
+        #page{
+            width: 100%;
+            height: 100%;
+        }
+        #nav-container{
+            width: 150px;
+            float: left;
+            background-color: #B0BEC5;
+            height: 100%;
+        }
+        #content-container{
+            float: left;
+            width: 1000px;
+            position: absolute;
+            top: 0;
+            left: 150px;
+
+        }
+        #logo{
+            background-color: gray;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        #nav{
+            width: 100%;
+            list-style: none;
+            font-weight: lighter;
+            color: snow;
+            text-align: center;
+            font-size: 20px;
+        }
+        #nav-project{
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        #nav-show{
+            background-color: #00A8E8;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        #nav-banner{
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        #nav-edu{
+            background-color: #00A8E8;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        #nav-activity{
+            background-color: #007EA7;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .nav-list{
+            display: none;
+            color: #233333;
+            width: 100%;
+            height: 55px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #CFD8DC;
+        }
+        .content{
+            display: none;
+            width: 100%;
+            height: auto;
+            padding-left: 50px;
+            padding-top: 70px;
+            line-height: 40px;
+            color:#00171F;
+        }
+        #bar{
+            width: 100%;
+            height: 55px;
+            float: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #003459;
+            border:#00171F 1px solid;
+            border-radius: 5px;
+        }
+        #user{
+            float: right;
+            color: #b3d4fd;
+            line-height: 55px;
+            right: 50px;
+            position: absolute;
+            top: 0;
+
+        }
+        #left{
+            float: right;
+            color: #b3d4fd;
+            line-height: 55px;
+            left: 15px;
+            position: absolute;
+            top: 0;
+        }
+        .search
+        {
+            margin-left:50px;
+            margin-top:50px;
+            /*background:url(images/search_inner.png) no-repeat 10px;*/
+            background:#b3d4fd;
+            background-position:10px 10px;
+            width:380px;
+            height:60px;
+        }
+        .search-inner
+        {
+            width:340px;
+            height:40px;
+            margin-right:20px;
+            margin-bottom:10px;
+            margin-left:20px;
+        }
+        .search-inner form input.searchbutton
+        {
+            background:#0F769F;
+            width:80px;
+            height:50px;
+            border:none;
+            margin-top:5px;
+            float:right;
+            color:#FFF;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        .search-inner form input.searchfield
+        {
+            width:260px;
+            height:38px;
+            margin-top:11px;
+            border:none;
+            background:transparent;
+            color:#666666;
+            font-family:Arial, Helvetica, sans-serif;
+            font-style:italic;
+            font-size:16px;
+            font-weight:bold;
+            line-height:38px;
+        }
+        .content-table{
+            margin-top: 70px;
+            width: 650px;
+            text-align: center;
+        }
+        .content-table td{
+            background-color: #b3d4fd;
+            margin-right: 10px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+        .content-table-title{
+            width: 250px;
+            text-align: center;
+
+        }
+    </style>
+    <script src="{{ url_for('static', filename='jquery-2.2.2.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/wangEditor.min.css') }}">
+
+</head>
+{% import "bootstrap/wtf.html" as wtf %}
+<body>
+<div id="page-container">
+    <div id="page">
+        <div id="nav-container">
+            <div id="nav">
+                <div id="logo"></div>
+                <ul>
+                    <li>
+                        <div id="nav-project" >项目秀</div>
+                        <div id="nav-project-list" class="nav-list" style="display: block">
+                            <ul>
+                                <li id="first" onclick="changeContent('#content-project-add',this)" style="font-weight: bold">添加</li>
+                                <li onclick="changeContent('#content-project-change',this)">管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-show">创客秀</div>
+                        <div id="nav-show-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-show-add',this)">添加</li>
+                                <li onclick="changeContent('#content-show-change',this)">管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-banner">轮播banner</div>
+                        <div id="nav-banner-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-banner-add',this)">添加</li>
+                                <li onclick="changeContent('#content-banner-change',this)">管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-edu">创客教育</div>
+                        <div id="nav-edu-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-edu-add',this)">添加</li>
+                                <li onclick="changeContent('#content-edu-change',this)">管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="nav-activity">日常活动</div>
+                        <div id="nav-activity-list" class="nav-list">
+                            <ul>
+                                <li onclick="changeContent('#content-activity-add',this)">添加</li>
+                                <li onclick="changeContent('#content-activity-change',this)">管理</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="bar">
+            <div id="left">创客空间后台系统</div>
+            <div id="user">
+                Hello,Admin
+            </div>
+        </div>
+        <div id="content-container">
+
+            <div class="content" id="content-project-add" style="display: block">
+                <form>
+                    {{ wtf.quick_form(proj_form) }}
+                    <textarea name="proj_content" class="editor"></textarea>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-project-change">
+                <div class="search">
+                    <div class="search-inner">
+                        <form method="get" action="#">
+                            <input type="text" name="search" maxlength="30" class="searchfield" title="searchfield" value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''" onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="Search" value="搜索" alt="Search" class="searchbutton" title="Search" />
+                        </form>
+
+                </div>
+                    <form>
+                    <table class="content-table">
+                        <tr>
+                            <td class="content-table-title">标题</td>
+                            <td>精选</td>
+                            <td>删除</td>
+                            <td>彻底删除</td>
+                        </tr>
+                        <tr>
+                            <td class="content-table-title">111</td>
+                            <td><input type="radio" /></td>
+                            <td><input type="checkbox" /></td>
+                            <td><input type="checkbox" /></td>
+                        </tr>
+                    </table>
+                        <input type="submit"/>
+                    </form>
+
+            </div>
+                </div>
+            <div class="content" id="content-show-add">
+                <form>
+                    <!--{{ wtf.quick_form(maker_form) }}-->
+                    <textarea name="maker_content" class="editor"></textarea>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div class="content" id="content-show-change">
+                <div class="search">
+                    <div class="search-inner">
+                        <form method="get" action="#">
+                            <input type="text" name="search" maxlength="30" class="searchfield" title="searchfield" value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''" onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="Search" value="搜索" alt="Search" class="searchbutton" title="Search" />
+                        </form>
+
+                    </div>
+                    <form>
+                        <table class="content-table">
+                            <tr>
+                                <td class="content-table-title">标题</td>
+                                <td>精选</td>
+                                <td>删除</td>
+                                <td>彻底删除</td>
+                            </tr>
+                            <tr>
+                                <td class="content-table-title">111</td>
+                                <td><input type="radio" /></td>
+                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        </table>
+                        <input type="submit"/>
+                    </form>
+
+                </div>
+            </div>
+            </div>
+            <div class="content" id="content-banner-add">
+                <form>
+                    Banner图片：<input title="" name="" type="file"><br />
+                    Banner链接：
+                    <input title="" name="" type="text"><br />
+                </form>
+            </div>
+            <div class="content" id="content-banner-change">
+                    <form>
+                        <table class="content-table">
+                            <tr>
+                                <td class="content-table-title">标题</td>
+                                <td>精选</td>
+                                <td>删除</td>
+                                <td>彻底删除</td>
+                            </tr>
+                            <tr>
+                                <td class="content-table-title">111</td>
+                                <td><input type="radio" /></td>
+                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        </table>
+                        <input type="submit"/>
+                    </form>
+
+                </div>
+            <div class="content" id="content-edu-add">
+                <form>
+                    项目名称：<input title="" name="edu_name" type="text"><br />
+                    项目封面图片：
+                    <input title="" name="edu_image" type="file"><br />
+                    项目主讲人：<input title="" name="edu_speaker" type="text"><br />
+                    项目视频链接：<input title="" name="edu_video" type="text"><br />
+                    视频简介：<br/>
+                    <textarea name="edu_introduction" onfocus="this.value = this.value.substring(0,25);" onblur="this.value = this.value.substring(0,25);" cols="50"></textarea>
+                    <textarea name="edu_content" class="editor"></textarea>
+                </form>
+            </div>
+            <div class="content" id="content-edu-change">
+                <div class="search">
+                    <div class="search-inner">
+                        <form method="get" action="#">
+                            <input type="text" name="search" maxlength="30" class="searchfield" title="searchfield" value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''" onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="Search" value="搜索" alt="Search" class="searchbutton" title="Search" />
+                        </form>
+
+                    </div>
+                    <form>
+                        <table class="content-table">
+                            <tr>
+                                <td class="content-table-title">标题</td>
+                                <td>精选</td>
+                                <td>删除</td>
+                                <td>彻底删除</td>
+                            </tr>
+                            <tr>
+                                <td class="content-table-title">111</td>
+                                <td><input type="radio" /></td>
+                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        </table>
+                        <input type="submit"/>
+                    </form>
+
+                </div>
+                </div>
+            <div class="content" id="content-activity-add">
+                <form>
+                    <!--{{ wtf.quick_form(activity_form) }}-->
+                    活动内容：
+                    <textarea class="editor" name="activity_content"></textarea>
+                </form>
+            </div>
+            <div class="content" id="content-activity-change">
+                <div class="search">
+                    <div class="search-inner">
+                        <form method="get" action="#">
+                            <input type="text" name="search" maxlength="30" class="searchfield" title="searchfield" value="请输入搜索内容" onfocus="if (this.value=='请输入搜索内容') this.value=''" onblur="if (this.value == '') this.value ='请输入搜索内容'"/>
+                            <input type="submit" name="Search" value="搜索" alt="Search" class="searchbutton" title="Search" />
+                        </form>
+
+                    </div>
+                    <form>
+                        <table class="content-table">
+                            <tr>
+                                <td class="content-table-title">标题</td>
+                                <td>精选</td>
+                                <td>删除</td>
+                                <td>彻底删除</td>
+                            </tr>
+                            <tr>
+                                <td class="content-table-title">111</td>
+                                <td><input type="radio" /></td>
+                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        </table>
+                        <input type="submit"/>
+                    </form>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery-1.10.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/wangEditor.min.js') }}"></script>
+
+<script>
+    var nowPage="#content-project-add",nowNav=document.getElementById("first");
+    $('document').ready(function () {
+
+        var editor = new wangEditor('editor');
+
+        editor.create();
+
+        $('#nav-project').click(function () {
+            $('#nav-project-list').slideToggle();
+        });
+        $('#nav-show').click(function () {
+            $('#nav-show-list').slideToggle();
+        });
+        $('#nav-edu').click(function () {
+            $('#nav-edu-list').slideToggle();
+        });
+        $('#nav-activity').click(function () {
+            $('#nav-activity-list').slideToggle();
+        });
+        $('#nav-banner').click(function () {
+            $('#nav-banner-list').slideToggle();
+        });
+    });
+    function changeContent(name,element) {
+        element.style.fontWeight="bold";
+        nowNav.style.fontWeight="lighter";
+        nowNav=element;
+        $(nowPage).fadeOut(function () {
+            $(name).fadeIn();
+            nowPage=name;
+        })
+    }
+
+</script>
+</body>
+</html>

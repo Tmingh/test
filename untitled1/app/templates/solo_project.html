@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华中大创客空间</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/swiper-3.3.0.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/home.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='main/js/jquery-1.11.3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/sec-tabChange.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/dl.js') }}"></script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	<div id="notice-tit" class="notice-tit">
+		<ul>
+			<li class="liclass select">
+				<a href="{{ url_for('auth.login') }}" class="aclass">登录</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_edu') }}" class="aclass">创客教育</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_activity') }}" class="aclass">日常活动</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_maker') }}" class="aclass">创客秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_project') }}" class="aclass">项目秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.index') }}" class="aclass">首页</a>
+			</li>
+			<!-- <li id="top-find">
+				<button class="top-find"><img src="../img/scope.png" alt=""></button>
+			</li>
+			<li id="top-search">
+					<input class="top-search" placeholder="请输入想搜索的内容……" type="text">
+				<div id="aho">
+
+				</div>
+			</li> -->
+		</ul>
+	</div>
+	<div id="logo">
+		<img src="{{ url_for('static', filename='main/img/Logo - Assistor.png') }}" height="48" width="230" alt="">
+	</div>
+
+			<div class="mod" style="display:block">
+				<div class="pro-item-header">
+					<p class="mh1" id="title">
+						我是题目
+					</p>
+					<p id="info">
+						学院 姓名
+					</p>
+				</div>
+				<div class="pro-item-con">
+					<div class="pro-item-con-img">
+
+					</div>
+					<div class="pro-item-con-word">
+						<div class="production">
+							这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过100字的文字介绍这是不超过1
+						</div>
+						<div class="information">
+							<div class="team item-detail">
+								<img src="../../img/团队伙伴 - Assistor.png" height="24" width="17">
+								<span>正在寻找团队伙伴//条件</span>
+							</div>
+							<div class="money item-detail">
+								<img src="../../img/资金 - Assistor.png" height="24" width="23">
+								<span>正在寻找资金//条件</span>
+							</div>
+							<div class="place item-detail">
+								<img src="../../img/设备 - Assistor.png" height="24" width="23">
+								<span>正在寻找场地与设备//条件</span>
+
+							</div>
+							<div class="tel item-detail">
+								<img src="../../img/联系方式 - Assistor.png" height="24" width="25">
+								<span>联系方式：电话或邮箱等</span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page">
+					<p>我是正文</p>
+					<p>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
+					<p>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
+				</div>
+			</div>
+
+	</div>
+
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	<script src="../js/swiper-3.3.0.jquery.min.js"></script>
+
+
+	<script>
+		$(window).ready(function() {
+            $.ajax({
+				url: '{{ url_for("main.solo_project", id=id) }}',
+				type: 'POST',
+				dataType: 'json',
+				data: {param1: 'value1'}
+			})
+			.done(function(data) {
+                var lebron = '<img src="'+ data.project["image_url"] +'" height="346" width="483">';
+                $(".pro-item-con-img").html(lebron);
+
+				$("#title").html(data.project["name"]);
+				$("#info").html(data.project["mgr_info"]+' '+data.project["mgr_name"]);
+				$(".production").html(data.project["sum"]);
+
+				var kobe = '';
+				if (data.project["need_money"]) {
+					kobe += '<div class="team item-detail"><img src="'+
+							'{{ url_for("static", filename="main/img/teamate - Assistor.png") }}' +
+							'" height="24" width="17"><span>正在寻找团队伙伴</span></div>'
+				}
+				if (data.project["need_devices"]) {
+					kobe += '<div class="money item-detail"><img src="'+
+							'{{ url_for("static", filename="main/img/money - Assistor.png") }}' +
+							'" height="24" width="23"> <span>正在寻找资金</span></div>'
+				}
+
+		        if (data.project["need_partners"]) {
+					kobe += '<div class="place item-detail"> <img src="'+
+							'{{ url_for("static", filename="main/img/facility - Assistor.png") }}'+
+							'" height="24" width="23"> <span>正在寻找场地与设备</span></div>'
+				}
+				kobe += '<div class="tel item-detail"><img src="' +
+						'{{ url_for("static", filename="main/img/contact - Assistor.png") }}'+
+						'" height="24" width="25"> <span>'+ data.project["email"] +'</span></div>';
+				$(".information").html(kobe);
+				$(".page").html(data.project["introduction"]);
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+        })
+	</script>
+
+	<script>
+		$(document).ready(function() {
+    		$("#top-search").hide();
+    	});
+    	$("#top-find").click(function(event) {
+    		if ($("#top-search").val() == 0) {
+                        $("#top-search").show(300,function(){
+                            $("#top-search").val(1);
+                        })
+                    } else {
+                        $("#top-search").hide(300,function(){
+                            $("#top-search").val(0);
+                        })
+                    }
+    	});
+    </script>
+</body>
+</html>

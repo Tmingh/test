@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>华中大创客空间</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/swiper-3.3.0.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/home.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main/css/bootstrap.min.css') }}">
+	<script src="{{ url_for('static', filename='main/js/jquery-1.11.3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/sec-tabChange.js') }}"></script>
+	<script src="{{ url_for('static', filename='main/js/dl.js') }}"></script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	<div id="notice-tit" class="notice-tit">
+		<ul>
+			<!-- <li class="liclass">
+				<a href="zhuce.html" class="aclass">注册</a>
+			</li> -->
+			<li class="liclass select">
+				<a href="{{ url_for('auth.login') }}" class="aclass">登录</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_edu') }}" class="aclass">创客教育</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_activity') }}" class="aclass">日常活动</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_maker') }}" class="aclass">创客秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.main_project') }}" class="aclass">项目秀</a>
+			</li>
+			<li class="liclass">
+				<a href="{{ url_for('main.index') }}" class="aclass">首页</a>
+			</li>
+			<!-- <li id="top-find">
+				<button class="top-find"><img src="../img/scope.png" alt=""></button>
+			</li>
+			<li id="top-search">
+					<input class="top-search" placeholder="请输入想搜索的内容……" type="text">
+				<div id="aho">
+
+				</div>
+			</li> -->
+		</ul>
+	</div>
+	<div id="logo">
+		<img src="{{ url_for('static', filename='main/img/Logo - Assistor.png') }}" height="48" width="230" alt="">
+	</div>
+
+	<div class="mod" id="mod-dl">
+    			<div class="title-container">
+    				<div class="title">
+    					<div class="t1">华中大创客空间</div>
+    					<div class="t2">登录</div>
+    				</div>
+    			</div>
+    			<div id="dl-container">
+    				<div id="dl">
+    					<form action="{{ url_for('auth.login') }}" method="post">
+    						<input type="text" placeholder="学号" name="student_id">
+    						<input type="password" placeholder="密码" name="password">
+    						<button type="submit">立即登录</button>
+    					</form>
+    					<div id="third-dl">
+    						<!-- <div id="third-dl-title">
+    							<div class="line third-dl-title">
+    						
+    							</div>
+    							<div class="third-dl-title" id="choose">
+    						选择第三方登录
+    							</div>
+    							<div class="line third-dl-title">
+    						
+    							</div>
+    						</div>
+    						<div id="icon-container">
+    							<div class="third-dl-icon">
+	    							<div id="btnLoginqq">
+	    								<a href="#" id=""><img src="../img/1.png" height="80" width="77"></a>
+	    							</div>
+	    						</div>
+	    						<div class="third-dl-icon">
+	    							<div id="btnLoginwx">
+	    								<a href="#"><img src="../img/2.png" height="80" width="77"></a>
+	    							</div>
+	    						</div>
+	    						<div class="third-dl-icon">
+	    							<div id="btnLoginwb">
+	    								<a href="#"><img src="../img/3.png" height="80" width="77"></a>
+	    							</div>
+	    						</div>
+    						</div> -->
+    						<div class="footer">
+	    						<div class="t1">不是华中大创客空间会员？</div>
+	    						<div class="t2"><a href="#">立即注册</a></div>
+	    					</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+
+	<script>
+		$(document).ready(function() {
+    		$("#top-search").hide();
+    	});
+    	$("#top-find").click(function(event) {
+    		if ($("#top-search").val() == 0) {
+                        $("#top-search").show(300,function(){
+                            $("#top-search").val(1);
+                        })
+                    } else {
+                        $("#top-search").hide(300,function(){
+                            $("#top-search").val(0);
+                        })
+                    }
+    	});
+    </script>
+
+</body>
+</html>
